@@ -1,3 +1,6 @@
+using Microsoft.EntityFrameworkCore;
+using Sha_InvoiceManagementSystem.Models;
+
 namespace Sha_InvoiceManagementSystem
 {
     public class Program
@@ -8,6 +11,10 @@ namespace Sha_InvoiceManagementSystem
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            // Register the DbContext with SQL Server
+            builder.Services.AddDbContext<ShaTaskContext>(options =>
+              options.UseSqlServer(builder.Configuration.GetConnectionString("ShaTaskDB")));
 
             var app = builder.Build();
 

@@ -2,7 +2,168 @@
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    .hero-section {
+        background: linear-gradient(135deg, #7ba7d9 0%, #a8c8ec 100%);
+        color: white;
+        padding: 80px 0;
+        text-align: center;
+        margin-bottom: 40px;
+    }
+
+    .hero-title {
+        font-size: 3rem;
+        font-weight: 700;
+        margin-bottom: 20px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+    }
+
+    .features-section {
+        padding: 60px 0;
+        background-color: #f8f9fa;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 10px;
+        padding: 30px;
+        margin-bottom: 30px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+        text-align: center;
+        transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .feature-icon {
+        font-size: 3rem;
+        color: #7ba7d9;
+        margin-bottom: 20px;
+    }
+
+    .feature-title {
+        color: #2c3e50;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 15px;
+    }
+
+    .feature-description {
+        color: #6c757d;
+        line-height: 1.6;
+    }
+
+    .cta-section {
+        background: linear-gradient(135deg, #064386 0%, #2c3e50 100%);
+        color: white;
+        padding: 60px 0;
+        text-align: center;
+    }
+
+    .cta-title {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+
+    .cta-description {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+        opacity: 0.9;
+    }
+
+    .btn-cta {
+        background-color: #a8c8ec;
+        color: #2c3e50;
+        padding: 15px 30px;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .btn-cta:hover {
+        background-color: #8fb4e5;
+        color: #2c3e50;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+</style>
+
+<div class="hero-section">
+    <div class="container">
+        <h1 class="hero-title">
+            <i class="bi bi-cash-coin me-3"></i>
+            Sha Invoice Management System
+        </h1>
+        <p class="hero-subtitle">
+            Streamline your business operations with our comprehensive invoice management solution
+        </p>
+    </div>
+</div>
+
+<div class="features-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-person-badge"></i>
+                    </div>
+                    <h3 class="feature-title">Cashier Management</h3>
+                    <p class="feature-description">
+                        Efficiently manage your cashiers with our comprehensive system. 
+                        Add, edit, and track cashier information with ease.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <h3 class="feature-title">Branch Management</h3>
+                    <p class="feature-description">
+                        Organize your business across multiple branches. 
+                        Track performance and manage operations effectively.
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="bi bi-receipt"></i>
+                    </div>
+                    <h3 class="feature-title">Invoice Processing</h3>
+                    <p class="feature-description">
+                        Generate and manage invoices seamlessly. 
+                        Track payments and maintain accurate records.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="cta-section">
+    <div class="container">
+        <h2 class="cta-title">Ready to Get Started?</h2>
+        <p class="cta-description">
+            Begin managing your cashiers and invoices efficiently today.
+        </p>
+        <a href="/Cashiers" class="btn-cta">
+            <i class="bi bi-arrow-right me-2"></i>
+            Manage Cashiers
+        </a>
+    </div>
 </div>

@@ -1,0 +1,180 @@
+@model IEnumerable<Sha_InvoiceManagementSystem.Models.Cashier>
+
+@{
+    ViewData["Title"] = "Cashiers";
+}
+
+<style>
+    .page-container {
+        background-color: #f8f9fa;
+        min-height: calc(100vh - 200px);
+        padding: 20px 0;
+    }
+
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .page-title {
+        color: #064386;
+        margin-bottom: 20px;
+        margin-top: 0;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .btn-custom {
+        background-color: #a8c8ec;
+        border: none;
+        color: #2c3e50;
+        padding: 10px 20px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.3s ease;
+        display: inline-block;
+    }
+
+    .btn-custom:hover {
+        background-color: #8fb4e5;
+        color: #2c3e50;
+        text-decoration: none;
+        transform: translateY(-1px);
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .table th {
+        background-color: #7ba7d9;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-weight: 600;
+    }
+
+    .table td {
+        vertical-align: middle;
+        text-align: center;
+        padding: 15px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .table tbody tr {
+        transition: background-color 0.3s ease;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f8f9ff;
+    }
+
+    .btn-group {
+        display: flex;
+        justify-content: center;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .btn-group .btn-custom {
+        padding: 6px 12px;
+        font-size: 13px;
+        min-width: 70px;
+    }
+
+    .btn-edit {
+        background-color: #ffd3a5;
+        color: #8b4513;
+    }
+
+    .btn-edit:hover {
+        background-color: #ffca8a;
+        color: #8b4513;
+    }
+
+    .btn-details {
+        background-color: #d4c5f9;
+        color: #6b46c1;
+    }
+
+    .btn-details:hover {
+        background-color: #c9b6f7;
+        color: #6b46c1;
+    }
+
+    .btn-delete {
+        background-color: #ffb3ba;
+        color: #dc2626;
+    }
+
+    .btn-delete:hover {
+        background-color: #ff9da6;
+        color: #dc2626;
+    }
+
+    @@media (max-width: 768px) {
+        .btn-group {
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .content-wrapper {
+            padding: 20px;
+            margin: 0 10px;
+        }
+    }
+</style>
+
+<div class="page-container">
+    <div class="content-wrapper">
+        <h2 class="page-title">Cashiers List</h2>
+
+        <p>
+            <a asp-action="Create" class="btn-custom">+ Add New Cashier</a>
+        </p>
+
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Cashier Name</th>
+                        <th>Branch Name</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cashier in Model)
+                    {
+                        <tr>
+                            <td>@cashier.CashierName</td>
+                            <td>@cashier.Branch?.BranchName</td>
+                            <td>
+                                <div class="btn-group">
+                                    <a asp-action="Edit" asp-route-id="@cashier.Id" class="btn-custom btn-edit">Edit</a>
+                                    <a asp-action="Details" asp-route-id="@cashier.Id" class="btn-custom btn-details">Details</a>
+                                    <a asp-action="Delete" asp-route-id="@cashier.Id" class="btn-custom btn-delete">Delete</a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
