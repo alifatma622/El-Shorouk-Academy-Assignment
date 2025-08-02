@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -5,6 +6,7 @@ using Sha_InvoiceManagementSystem.Models;
 
 namespace Sha_InvoiceManagementSystem.Controllers
 {
+    [Authorize(Roles = "Admin,Cashier")]
     public class InvoicesController : Controller
     {
         private readonly ShaTaskContext _context;
@@ -15,7 +17,7 @@ namespace Sha_InvoiceManagementSystem.Controllers
         }
 
         // GET: Invoices
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             return RedirectToAction("InvoiceData");
         }

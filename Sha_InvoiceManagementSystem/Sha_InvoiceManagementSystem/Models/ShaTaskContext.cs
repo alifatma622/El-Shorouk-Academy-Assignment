@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Sha_InvoiceManagementSystem.Models;
 
-public partial class ShaTaskContext : DbContext
+public partial class ShaTaskContext : IdentityDbContext<ApplicationUser>
 {
     public ShaTaskContext()
     {
@@ -30,6 +31,8 @@ public partial class ShaTaskContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        base.OnModelCreating(modelBuilder);
+
         modelBuilder.Entity<Branch>(entity =>
         {
             entity.Property(e => e.Id).HasColumnName("ID");

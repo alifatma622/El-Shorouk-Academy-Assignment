@@ -161,9 +161,31 @@
         <p class="cta-description">
             Begin managing your cashiers and invoices efficiently today.
         </p>
-        <a href="/Cashiers" class="btn-cta">
-            <i class="bi bi-arrow-right me-2"></i>
-            Manage Cashiers
-        </a>
+        @if (User.Identity?.IsAuthenticated == true)
+        {
+            @if (User.IsInRole("Admin"))
+            {
+                <a href="/Cashiers" class="btn-cta">
+                    <i class="bi bi-arrow-right me-2"></i>
+                    Manage Cashiers
+                </a>
+            }
+            <a href="/Invoices" class="btn-cta" style="margin-left: 10px;">
+                <i class="bi bi-receipt me-2"></i>
+                Manage Invoices
+            </a>
+        }
+        else
+        {
+            <a href="/Account/Login" class="btn-cta">
+                <i class="bi bi-box-arrow-in-right me-2"></i>
+                Sign In to Continue
+            </a>
+            <br><br>
+            <a href="/Account/Register" class="btn-cta" style="background-color: transparent; border: 2px solid #a8c8ec;">
+                <i class="bi bi-person-plus me-2"></i>
+                Create Account
+            </a>
+        }
     </div>
 </div>

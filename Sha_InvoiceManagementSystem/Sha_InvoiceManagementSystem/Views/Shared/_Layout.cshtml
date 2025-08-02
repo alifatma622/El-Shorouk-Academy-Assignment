@@ -93,21 +93,69 @@
                                 <i class="bi bi-house-door me-1"></i>Home
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Cashiers" asp-action="Index">
-                                <i class="bi bi-person-badge me-1"></i>Cashiers
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" asp-area="" asp-controller="Invoices" asp-action="InvoiceData">
-                                <i class="bi bi-receipt me-1"></i>Invoices
-                            </a>
-                        </li>
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-controller="Cashiers" asp-action="Index">
+                                        <i class="bi bi-person-badge me-1"></i>Cashiers
+                                    </a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link" asp-area="" asp-controller="Invoices" asp-action="InvoiceData">
+                                    <i class="bi bi-receipt me-1"></i>Invoices
+                                </a>
+                            </li>
+                        }
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Privacy">
                                 <i class="bi bi-shield-check me-1"></i>Privacy
                             </a>
                         </li>
+                    </ul>
+                    <ul class="navbar-nav">
+                        @if (User.Identity?.IsAuthenticated == true)
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-person-circle me-1"></i>@User.Identity.Name
+                                    @if (User.IsInRole("Admin"))
+                                    {
+                                        <span class="badge bg-danger ms-1">Admin</span>
+                                    }
+                                    else if (User.IsInRole("Cashier"))
+                                    {
+                                        <span class="badge bg-primary ms-1">Cashier</span>
+                                    }
+                                </a>
+                                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li>
+                                        <form asp-controller="Account" asp-action="Logout" method="post" style="display: inline;">
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="bi bi-box-arrow-right me-2"></i>Logout
+                                            </button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Login">
+                                    <i class="bi bi-box-arrow-in-right me-1"></i>Login
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Account" asp-action="Register">
+                                    <i class="bi bi-person-plus me-1"></i>Register
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
