@@ -1,0 +1,300 @@
+@model Sha_InvoiceManagementSystem.Models.InvoiceHeader
+
+@{
+    ViewData["Title"] = "Invoice Details";
+}
+
+<style>
+    .page-container {
+        background-color: #f8f9fa;
+        min-height: calc(100vh - 200px);
+        padding: 20px 0;
+    }
+
+    .content-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .page-title {
+        color: #064386;
+        margin-bottom: 30px;
+        margin-top: 0;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .invoice-header {
+        background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%);
+        border: 2px solid #7ba7d9;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+
+    .invoice-info {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+        margin-bottom: 20px;
+    }
+
+    .info-item {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+    }
+
+    .info-label {
+        font-weight: 600;
+        color: #2c3e50;
+        min-width: 120px;
+        margin-right: 15px;
+    }
+
+    .info-value {
+        color: #6c757d;
+        flex: 1;
+    }
+
+    .invoice-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #064386;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .items-section {
+        margin-top: 30px;
+    }
+
+    .items-title {
+        color: #064386;
+        margin-bottom: 20px;
+        font-size: 1.3rem;
+        font-weight: 600;
+    }
+
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .table th {
+        background-color: #7ba7d9;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        font-weight: 600;
+    }
+
+    .table td {
+        vertical-align: middle;
+        text-align: center;
+        padding: 15px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .table tbody tr {
+        transition: background-color 0.3s ease;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f8f9ff;
+    }
+
+    .table tfoot th {
+        background-color: #e9ecef;
+        color: #495057;
+        font-weight: 600;
+        border-top: 2px solid #dee2e6;
+    }
+
+    .total-section {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        border: 1px solid #dee2e6;
+    }
+
+    .total-amount {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #28a745;
+        text-align: center;
+    }
+
+    .btn-container {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+        justify-content: center;
+    }
+
+    .btn-custom {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background-color: #7ba7d9;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #6b96c9;
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+
+    @@media (max-width: 768px) {
+        .invoice-info {
+            grid-template-columns: 1fr;
+        }
+
+        .content-wrapper {
+            padding: 20px;
+            margin: 0 10px;
+        }
+
+        .btn-container {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+</style>
+
+<div class="page-container">
+    <div class="content-wrapper">
+        <h2 class="page-title">
+            <i class="bi bi-receipt me-3"></i>
+            Invoice Details
+        </h2>
+
+        <div class="invoice-header">
+            <div class="invoice-number">
+                Invoice #@Model.Id
+            </div>
+            
+            <div class="invoice-info">
+                <div class="info-item">
+                    <span class="info-label">Customer Name:</span>
+                    <span class="info-value">@Model.CustomerName</span>
+                </div>
+                
+                <div class="info-item">
+                    <span class="info-label">Invoice Date:</span>
+                    <span class="info-value">@Model.Invoicedate.ToShortDateString()</span>
+                </div>
+                
+                <div class="info-item">
+                    <span class="info-label">Cashier:</span>
+                    <span class="info-value">@Model.Cashier?.CashierName</span>
+                </div>
+                
+                <div class="info-item">
+                    <span class="info-label">Branch:</span>
+                    <span class="info-value">@Model.Branch?.BranchName</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="items-section">
+            <h4 class="items-title">
+                <i class="bi bi-list-ul me-2"></i>Invoice Items
+            </h4>
+            
+            @if (Model.InvoiceDetails != null && Model.InvoiceDetails.Any())
+            {
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Item Name</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.InvoiceDetails)
+                        {
+                            <tr>
+                                <td>@item.ItemName</td>
+                                <td>@item.ItemCount</td>
+                                <td>@item.ItemPrice.ToString("C")</td>
+                                <td>@((item.ItemCount * item.ItemPrice).ToString("C"))</td>
+                            </tr>
+                        }
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="3">Total Amount:</th>
+                            <th>@ViewBag.Total.ToString("0.00") EGP</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            }
+            else
+            {
+                <div style="text-align: center; padding: 40px; color: #6c757d;">
+                    <i class="bi bi-inbox" style="font-size: 3rem; margin-bottom: 20px;"></i>
+                    <p>No items found in this invoice.</p>
+                </div>
+            }
+        </div>
+
+        <div class="btn-container">
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn-custom btn-primary">
+                <i class="bi bi-pencil me-2"></i>Edit Invoice
+            </a>
+            <a asp-action="Index" class="btn-custom btn-secondary">
+                <i class="bi bi-arrow-left me-2"></i>Back to List
+            </a>
+            <a asp-action="AddItems" asp-route-id="@Model.Id" class="btn-custom btn-success">
+                <i class="bi bi-plus-circle me-2"></i>Add More Items
+            </a>
+        </div>
+    </div>
+</div> 

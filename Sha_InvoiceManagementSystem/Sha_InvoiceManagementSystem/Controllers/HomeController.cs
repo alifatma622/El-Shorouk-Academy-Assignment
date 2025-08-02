@@ -8,5 +8,10 @@ namespace Sha_InvoiceManagementSystem.Controllers
         {
             return View();
         }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
     }
 }

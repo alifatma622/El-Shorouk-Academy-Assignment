@@ -1,0 +1,562 @@
+@model Sha_InvoiceManagementSystem.Models.InvoiceHeader
+
+@{
+    ViewData["Title"] = "Edit Invoice";
+}
+
+<style>
+    .page-container {
+        background-color: #f8f9fa;
+        min-height: calc(100vh - 200px);
+        padding: 20px 0;
+    }
+
+    .content-wrapper {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    }
+
+    .page-title {
+        color: #064386;
+        margin-bottom: 30px;
+        margin-top: 0;
+        font-size: 2rem;
+        font-weight: 600;
+    }
+
+    .invoice-info {
+        background: linear-gradient(135deg, #f8f9ff 0%, #e8f4fd 100%);
+        border: 2px solid #7ba7d9;
+        border-radius: 10px;
+        padding: 25px;
+        margin-bottom: 30px;
+    }
+
+    .invoice-number {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #064386;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 25px;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 12px 15px;
+        border: 2px solid #e9ecef;
+        border-radius: 8px;
+        font-size: 16px;
+        transition: all 0.3s ease;
+        background-color: #fff;
+    }
+
+    .form-control:focus {
+        outline: none;
+        border-color: #7ba7d9;
+        box-shadow: 0 0 0 3px rgba(123, 167, 217, 0.1);
+    }
+
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    .btn-container {
+        display: flex;
+        gap: 15px;
+        margin-top: 30px;
+        justify-content: center;
+    }
+
+    .btn-custom {
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        cursor: pointer;
+        display: inline-block;
+    }
+
+    .btn-primary {
+        background-color: #7ba7d9;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #6b96c9;
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+
+    .btn-success {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        color: white;
+        text-decoration: none;
+        transform: translateY(-2px);
+    }
+
+    .items-summary {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 20px;
+        border: 1px solid #dee2e6;
+    }
+
+    .items-title {
+        color: #064386;
+        margin-bottom: 15px;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .items-count {
+        color: #6c757d;
+        font-size: 1.1rem;
+    }
+
+    .total-amount {
+        color: #28a745;
+        font-weight: 600;
+        font-size: 1.2rem;
+    }
+
+    .items-table {
+        margin-top: 20px;
+    }
+
+    .items-table .table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+    }
+
+    .items-table .table th {
+        background-color: #7ba7d9;
+        color: white;
+        text-align: center;
+        padding: 12px;
+        font-weight: 600;
+    }
+
+    .items-table .table td {
+        vertical-align: middle;
+        text-align: center;
+        padding: 8px;
+        border-bottom: 1px solid #f0f0f0;
+    }
+
+    .items-table .table tbody tr {
+        transition: background-color 0.3s ease;
+    }
+
+    .items-table .table tbody tr:hover {
+        background-color: #f8f9ff;
+    }
+
+    .items-table .table tfoot th {
+        background-color: #e9ecef;
+        color: #495057;
+        font-weight: 600;
+        border-top: 2px solid #dee2e6;
+    }
+
+    .item-name, .item-count, .item-price {
+        width: 100%;
+        padding: 6px 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        text-align: center;
+    }
+
+    .item-name:focus, .item-count:focus, .item-price:focus {
+        outline: none;
+        border-color: #7ba7d9;
+        box-shadow: 0 0 0 2px rgba(123, 167, 217, 0.2);
+    }
+
+    .item-total {
+        font-weight: 600;
+        color: #28a745;
+    }
+
+    .btn-group {
+        display: flex;
+        gap: 5px;
+        justify-content: center;
+    }
+
+    .btn-sm {
+        padding: 4px 8px;
+        font-size: 12px;
+        border-radius: 4px;
+    }
+
+    .btn-primary {
+        background-color: #28a745;
+        border-color: #28a745;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background-color: #218838;
+        border-color: #1e7e34;
+    }
+
+    .btn-secondary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+        color: white;
+    }
+
+    .btn-secondary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+    .btn-danger {
+        background-color: #dc3545;
+        border-color: #dc3545;
+        color: white;
+    }
+
+    .btn-danger:hover {
+        background-color: #c82333;
+        border-color: #bd2130;
+    }
+
+    @@media (max-width: 768px) {
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+
+        .content-wrapper {
+            padding: 20px;
+            margin: 0 10px;
+        }
+
+        .btn-container {
+            flex-direction: column;
+            gap: 10px;
+        }
+    }
+</style>
+
+<div class="page-container">
+    <div class="content-wrapper">
+        <h2 class="page-title">
+            <i class="bi bi-pencil me-3"></i>
+            Edit Invoice
+        </h2>
+
+        <div class="invoice-info">
+            <div class="invoice-number">
+                Invoice #@Model.Id
+            </div>
+        </div>
+
+        <form asp-action="Edit" method="post">
+            <input type="hidden" asp-for="Id" />
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="CustomerName" class="form-label">
+                        <i class="bi bi-person me-2"></i>Customer Name
+                    </label>
+                    <input asp-for="CustomerName" class="form-control" placeholder="Enter customer name" required />
+                    <span asp-validation-for="CustomerName" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Invoicedate" class="form-label">
+                        <i class="bi bi-calendar me-2"></i>Invoice Date
+                    </label>
+                    <input asp-for="Invoicedate" type="date" class="form-control" required />
+                    <span asp-validation-for="Invoicedate" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label asp-for="CashierId" class="form-label">
+                        <i class="bi bi-person-badge me-2"></i>Cashier
+                    </label>
+                    <select asp-for="CashierId" class="form-control" asp-items="ViewBag.CashierId">
+                        <option value="">-- Select Cashier --</option>
+                    </select>
+                    <span asp-validation-for="CashierId" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="BranchId" class="form-label">
+                        <i class="bi bi-building me-2"></i>Branch
+                    </label>
+                    <select asp-for="BranchId" class="form-control" asp-items="ViewBag.BranchId" required>
+                        <option value="">-- Select Branch --</option>
+                    </select>
+                    <span asp-validation-for="BranchId" class="text-danger"></span>
+                </div>
+            </div>
+
+            @if (Model.InvoiceDetails != null && Model.InvoiceDetails.Any())
+            {
+                <div class="items-summary">
+                    <h5 class="items-title">
+                        <i class="bi bi-list-ul me-2"></i>Invoice Items
+                    </h5>
+                    
+                    <div class="items-table">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>Total</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.InvoiceDetails)
+                                {
+                                    <tr data-item-id="@item.Id">
+                                        <td>
+                                            <input type="text" class="form-control item-name" value="@item.ItemName" data-original="@item.ItemName" />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control item-count" value="@item.ItemCount" min="1" data-original="@item.ItemCount" />
+                                        </td>
+                                        <td>
+                                            <input type="number" class="form-control item-price" value="@item.ItemPrice" min="0" step="0.01" data-original="@item.ItemPrice" />
+                                        </td>
+                                        <td class="item-total">
+                                            @((item.ItemCount * item.ItemPrice).ToString("C"))
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-sm btn-primary save-item" style="display: none;">
+                                                    <i class="bi bi-check"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-secondary cancel-item" style="display: none;">
+                                                    <i class="bi bi-x"></i>
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-danger delete-item">
+                                                    <i class="bi bi-trash"></i>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th colspan="3">Total Amount:</th>
+                                    <th id="grand-total">@Model.InvoiceDetails.Sum(i => i.ItemCount * i.ItemPrice).ToString("0.00") EGP</th>
+                                    <th></th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            }
+
+            <div class="btn-container">
+                <button type="submit" class="btn-custom btn-primary">
+                    <i class="bi bi-check-circle me-2"></i>Save Changes
+                </button>
+                <a asp-action="Details" asp-route-id="@Model.Id" class="btn-custom btn-secondary">
+                    <i class="bi bi-eye me-2"></i>View Details
+                </a>
+                <a asp-action="Index" class="btn-custom btn-success">
+                    <i class="bi bi-arrow-left me-2"></i>Back to List
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $(document).ready(function() {
+            // Handle input changes to show save/cancel buttons
+            $('.item-name, .item-count, .item-price').on('input', function() {
+                var row = $(this).closest('tr');
+                var originalName = row.find('.item-name').data('original');
+                var originalCount = parseFloat(row.find('.item-count').data('original'));
+                var originalPrice = parseFloat(row.find('.item-price').data('original'));
+                
+                var currentName = row.find('.item-name').val();
+                var currentCount = parseFloat(row.find('.item-count').val());
+                var currentPrice = parseFloat(row.find('.item-price').val());
+                
+                if (currentName !== originalName || currentCount !== originalCount || currentPrice !== originalPrice) {
+                    row.find('.save-item, .cancel-item').show();
+                } else {
+                    row.find('.save-item, .cancel-item').hide();
+                }
+            });
+            
+            // Calculate total for a row
+            function calculateRowTotal(row) {
+                var count = parseFloat(row.find('.item-count').val()) || 0;
+                var price = parseFloat(row.find('.item-price').val()) || 0;
+                var total = count * price;
+                row.find('.item-total').text('$' + total.toFixed(2));
+                return total;
+            }
+            
+            // Update grand total
+            function updateGrandTotal() {
+                var grandTotal = 0;
+                $('.item-count').each(function() {
+                    var row = $(this).closest('tr');
+                    grandTotal += calculateRowTotal(row);
+                });
+                $('#grand-total').text(grandTotal.toFixed(2) + ' EGP');
+            }
+            
+            // Handle quantity and price changes
+            $('.item-count, .item-price').on('input', function() {
+                var row = $(this).closest('tr');
+                calculateRowTotal(row);
+                updateGrandTotal();
+            });
+            
+            // Save item changes
+            $('.save-item').on('click', function() {
+                var row = $(this).closest('tr');
+                var itemId = row.data('item-id');
+                var itemName = row.find('.item-name').val();
+                var itemCount = row.find('.item-count').val();
+                var itemPrice = row.find('.item-price').val();
+                
+                // Create form data
+                var formData = new FormData();
+                formData.append('Id', itemId);
+                formData.append('ItemName', itemName);
+                formData.append('ItemCount', itemCount);
+                formData.append('ItemPrice', itemPrice);
+                formData.append('InvoiceHeaderId', @Model.Id);
+                formData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]').val());
+                
+                // Send AJAX request
+                $.ajax({
+                    url: '@Url.Action("EditItem", "Invoices")',
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    success: function(response) {
+                        // Update original values
+                        row.find('.item-name').data('original', itemName);
+                        row.find('.item-count').data('original', itemCount);
+                        row.find('.item-price').data('original', itemPrice);
+                        
+                        // Hide save/cancel buttons
+                        row.find('.save-item, .cancel-item').hide();
+                        
+                        // Show success message
+                        alert('Item updated successfully!');
+                    },
+                    error: function() {
+                        alert('Error updating item. Please try again.');
+                    }
+                });
+            });
+            
+            // Cancel item changes
+            $('.cancel-item').on('click', function() {
+                var row = $(this).closest('tr');
+                var originalName = row.find('.item-name').data('original');
+                var originalCount = row.find('.item-count').data('original');
+                var originalPrice = row.find('.item-price').data('original');
+                
+                // Restore original values
+                row.find('.item-name').val(originalName);
+                row.find('.item-count').val(originalCount);
+                row.find('.item-price').val(originalPrice);
+                
+                // Recalculate totals
+                calculateRowTotal(row);
+                updateGrandTotal();
+                
+                // Hide save/cancel buttons
+                row.find('.save-item, .cancel-item').hide();
+            });
+            
+            // Delete item
+            $('.delete-item').on('click', function() {
+                if (confirm('Are you sure you want to delete this item?')) {
+                    var row = $(this).closest('tr');
+                    var itemId = row.data('item-id');
+                    
+                    // Create form data
+                    var formData = new FormData();
+                    formData.append('id', itemId);
+                    formData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]').val());
+                    
+                    // Send AJAX request
+                    $.ajax({
+                        url: '@Url.Action("DeleteItem", "Invoices")',
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            // Remove the row
+                            row.remove();
+                            updateGrandTotal();
+                            alert('Item deleted successfully!');
+                        },
+                        error: function() {
+                            alert('Error deleting item. Please try again.');
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+} 
