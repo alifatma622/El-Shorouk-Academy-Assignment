@@ -385,6 +385,8 @@
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </div>
+                                          
+
                                         </td>
                                     </tr>
                                 }
@@ -523,7 +525,7 @@
                 calculateRowTotal(row);
                 updateGrandTotal();
                 
-                // Hide save/cancel buttons
+              
                 row.find('.save-item, .cancel-item').hide();
             });
             
@@ -533,12 +535,11 @@
                     var row = $(this).closest('tr');
                     var itemId = row.data('item-id');
                     
-                    // Create form data
+                   
                     var formData = new FormData();
                     formData.append('id', itemId);
                     formData.append('__RequestVerificationToken', $('input[name="__RequestVerificationToken"]').val());
                     
-                    // Send AJAX request
                     $.ajax({
                         url: '@Url.Action("DeleteItem", "Invoices")',
                         type: 'POST',

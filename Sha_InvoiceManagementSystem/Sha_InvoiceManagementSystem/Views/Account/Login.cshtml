@@ -4,7 +4,7 @@
 
 <style>
     .login-container {
-        background: linear-gradient(135deg, #0f4279 0%, #1a5a9e 100%);
+        background: white;
         min-height: 100vh;
         display: flex;
         align-items: center;
@@ -12,13 +12,42 @@
         padding: 20px;
     }
 
-    .login-card {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        padding: 40px;
+    .login-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
-        max-width: 400px;
+       
+        max-width: 910px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        /* gap: 15px;  */
+        flex-direction: row-reverse;
+    }
+
+    .login-image {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-right: 10px;
+    }
+
+        .login-image img {
+            width: 100%;
+            max-width: 450px;
+            height: 520px;
+            /* border-radius: 15px; */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+    .login-card {
+        flex: 1;
+        background: white;
+        /* border-radius: 15px; */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        padding: 40px 30px;
+        max-width: 450px;
     }
 
     .login-header {
@@ -58,11 +87,11 @@
         transition: all 0.3s ease;
     }
 
-    .form-control:focus {
-        border-color: #0f4279;
-        box-shadow: 0 0 0 0.2rem rgba(15, 66, 121, 0.25);
-        outline: none;
-    }
+        .form-control:focus {
+            border-color: #0f4279;
+            box-shadow: 0 0 0 0.2rem rgba(15, 66, 121, 0.25);
+            outline: none;
+        }
 
     .btn-login {
         background: linear-gradient(135deg, #0f4279 0%, #1a5a9e 100%);
@@ -77,10 +106,10 @@
         transition: all 0.3s ease;
     }
 
-    .btn-login:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(15, 66, 121, 0.3);
-    }
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(15, 66, 121, 0.3);
+        }
 
     .login-footer {
         text-align: center;
@@ -95,9 +124,9 @@
         font-weight: 600;
     }
 
-    .login-link:hover {
-        text-decoration: underline;
-    }
+        .login-link:hover {
+            text-decoration: underline;
+        }
 
     .validation-error {
         color: #dc3545;
@@ -121,78 +150,101 @@
         padding-left: 45px;
     }
 
-    @@media (max-width: 480px) {
-        .login-card {
-            padding: 30px 20px;
-        }
+    @@media (max-width: 768px) {
+        .login-content
+
+    {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .login-image,
+    .login-card {
+        max-width: 100%;
+        padding: 0;
+    }
+
+    .login-card {
+        padding: 30px 20px;
+    }
+
     }
 </style>
 
 <div class="login-container">
-    <div class="login-card">
-        <div class="login-header">
-            <h1 class="login-title">
-                <i class="bi bi-shield-lock me-2"></i>
-                Welcome Back
-            </h1>
-            <p class="login-subtitle">Sign in to your account</p>
+    <div class="login-content">
+       
+        <div class="login-image">
+            <img src="/images/login.jpg" alt="Login Image" />
         </div>
 
-        <form asp-action="Login" method="post">
-            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
-
-            <div class="form-group">
-                <label class="form-label">
-                    <i class="bi bi-envelope me-1"></i>
-                    Email Address
-                </label>
-                <div class="input-group">
-                    <i class="bi bi-envelope input-icon"></i>
-                    <input type="email" name="email" class="form-control form-control-with-icon" 
-                           placeholder="Enter your email" required />
-                </div>
-                @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"]?.Errors?.Count > 0)
-                {
-                    <div class="validation-error">@ViewData.ModelState["email"]?.Errors?.First()?.ErrorMessage</div>
-                }
+       
+        <div class="login-card">
+            <div class="login-header">
+                <h1 class="login-title">
+                    <i class="bi bi-shield-lock me-2"></i>
+                    Welcome Back
+                </h1>
+                <p class="login-subtitle">Sign in to your account</p>
             </div>
 
-            <div class="form-group">
-                <label class="form-label">
-                    <i class="bi bi-lock me-1"></i>
-                    Password
-                </label>
-                <div class="input-group">
-                    <i class="bi bi-lock input-icon"></i>
-                    <input type="password" name="password" class="form-control form-control-with-icon" 
-                           placeholder="Enter your password" required />
-                </div>
-                @if (!ViewData.ModelState.IsValid && ViewData.ModelState["password"]?.Errors?.Count > 0)
-                {
-                    <div class="validation-error">@ViewData.ModelState["password"]?.Errors?.First()?.ErrorMessage</div>
-                }
-            </div>
+            <form asp-action="Login" method="post">
+                <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
 
-            @if (!ViewData.ModelState.IsValid)
-            {
-                <div class="validation-error">
-                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="bi bi-envelope me-1"></i>
+                        Email Address
+                    </label>
+                    <div class="input-group">
+                        <i class="bi bi-envelope input-icon"></i>
+                        <input type="email" name="email" class="form-control form-control-with-icon"
+                               placeholder="Enter your email" required />
+                    </div>
+                    @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"]?.Errors?.Count > 0)
                     {
-                        <div>@error.ErrorMessage</div>
+                        <div class="validation-error">@ViewData.ModelState["email"]?.Errors?.First()?.ErrorMessage</div>
                     }
                 </div>
-            }
 
-            <button type="submit" class="btn-login">
-                <i class="bi bi-box-arrow-in-right me-2"></i>
-                Sign In
-            </button>
-        </form>
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="bi bi-lock me-1"></i>
+                        Password
+                    </label>
+                    <div class="input-group">
+                        <i class="bi bi-lock input-icon"></i>
+                        <input type="password" name="password" class="form-control form-control-with-icon"
+                               placeholder="Enter your password" required />
+                    </div>
+                    @if (!ViewData.ModelState.IsValid && ViewData.ModelState["password"]?.Errors?.Count > 0)
+                    {
+                        <div class="validation-error">@ViewData.ModelState["password"]?.Errors?.First()?.ErrorMessage</div>
+                    }
+                </div>
 
-        <div class="login-footer">
-            <p>Don't have an account? 
-                <a asp-action="Register" class="login-link">Sign up here</a>
-            </p>
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="validation-error">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <div>@error.ErrorMessage</div>
+                        }
+                    </div>
+                }
+
+                <button type="submit" class="btn-login">
+                    <i class="bi bi-box-arrow-in-right me-2"></i>
+                    Sign In
+                </button>
+            </form>
+
+            <div class="login-footer">
+                <p>
+                    Don't have an account?
+                    <a asp-action="Register" class="login-link">Sign up here</a>
+                </p>
+            </div>
         </div>
     </div>
-</div> 
+</div>

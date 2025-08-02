@@ -4,21 +4,50 @@
 
 <style>
     .register-container {
-        background: linear-gradient(135deg, #0f4279 0%, #1a5a9e 100%);
+        background: white;
         min-height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         padding: 20px;
+        margin-bottom: 110px;
     }
 
-    .register-card {
-        background: white;
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        padding: 40px;
+    .register-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         width: 100%;
-        max-width: 450px;
+        max-width: 1100px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        /* gap: 1px;  */
+        flex-direction: row-reverse;
+    }
+
+    .register-image {
+        flex: 1;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        padding-right: 10px;
+    }
+
+        .register-image img {
+            width: 100%;
+            max-width: 550px;
+            height:729px;
+            /* border-radius: 15px; */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+    .register-card {
+        flex: 1;
+        background: white;
+        /* border-radius: 15px; */
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        padding: 40px 30px;
+        max-width: 500px;
     }
 
     .register-header {
@@ -58,11 +87,11 @@
         transition: all 0.3s ease;
     }
 
-    .form-control:focus {
-        border-color: #0f4279;
-        box-shadow: 0 0 0 0.2rem rgba(15, 66, 121, 0.25);
-        outline: none;
-    }
+        .form-control:focus {
+            border-color: #0f4279;
+            box-shadow: 0 0 0 0.2rem rgba(15, 66, 121, 0.25);
+            outline: none;
+        }
 
     .btn-register {
         background: linear-gradient(135deg, #0f4279 0%, #1a5a9e 100%);
@@ -77,10 +106,10 @@
         transition: all 0.3s ease;
     }
 
-    .btn-register:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(15, 66, 121, 0.3);
-    }
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(15, 66, 121, 0.3);
+        }
 
     .register-footer {
         text-align: center;
@@ -95,9 +124,9 @@
         font-weight: 600;
     }
 
-    .register-link:hover {
-        text-decoration: underline;
-    }
+        .register-link:hover {
+            text-decoration: underline;
+        }
 
     .validation-error {
         color: #dc3545;
@@ -130,128 +159,149 @@
         flex: 1;
     }
 
-    @@media (max-width: 480px) {
-        .register-card {
-            padding: 30px 20px;
-        }
-        
-        .row {
-            flex-direction: column;
-            gap: 0;
-        }
+    @@media (max-width: 768px) {
+        .register-content
+
+    {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .register-card {
+        padding: 30px 20px;
+    }
+
+    .row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .register-image {
+        justify-content: center;
+        padding: 0;
+    }
+
     }
 </style>
 
 <div class="register-container">
-    <div class="register-card">
-        <div class="register-header">
-            <h1 class="register-title">
-                <i class="bi bi-person-plus me-2"></i>
-                Create Account
-            </h1>
-            <p class="register-subtitle">Join our invoice management system</p>
+    <div class="register-content">
+        <div class="register-image">
+            <img src="/images/sign up.jpg" alt="Register Image" />
         </div>
 
-        <form asp-action="Register" method="post">
-            <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+        <div class="register-card">
+            <div class="register-header">
+                <h1 class="register-title">
+                    <i class="bi bi-person-plus me-2"></i>
+                    Create Account
+                </h1>
+                <p class="register-subtitle">Join our invoice management system</p>
+            </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label class="form-label">
-                            <i class="bi bi-person me-1"></i>
-                            First Name
-                        </label>
-                        <div class="input-group">
-                            <i class="bi bi-person input-icon"></i>
-                            <input type="text" name="firstName" class="form-control form-control-with-icon" 
-                                   placeholder="Enter first name" required />
+            <form asp-action="Register" method="post">
+                <input type="hidden" name="returnUrl" value="@ViewData["ReturnUrl"]" />
+
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-person me-1"></i>
+                                First Name
+                            </label>
+                            <div class="input-group">
+                                <i class="bi bi-person input-icon"></i>
+                                <input type="text" name="firstName" class="form-control form-control-with-icon"
+                                       placeholder="Enter first name" required />
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="bi bi-person me-1"></i>
+                                Last Name
+                            </label>
+                            <div class="input-group">
+                                <i class="bi bi-person input-icon"></i>
+                                <input type="text" name="lastName" class="form-control form-control-with-icon"
+                                       placeholder="Enter last name" required />
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label class="form-label">
-                            <i class="bi bi-person me-1"></i>
-                            Last Name
-                        </label>
-                        <div class="input-group">
-                            <i class="bi bi-person input-icon"></i>
-                            <input type="text" name="lastName" class="form-control form-control-with-icon" 
-                                   placeholder="Enter last name" required />
-                        </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="bi bi-envelope me-1"></i>
+                        Email Address
+                    </label>
+                    <div class="input-group">
+                        <i class="bi bi-envelope input-icon"></i>
+                        <input type="email" name="email" class="form-control form-control-with-icon"
+                               placeholder="Enter your email" required />
                     </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">
-                    <i class="bi bi-envelope me-1"></i>
-                    Email Address
-                </label>
-                <div class="input-group">
-                    <i class="bi bi-envelope input-icon"></i>
-                    <input type="email" name="email" class="form-control form-control-with-icon" 
-                           placeholder="Enter your email" required />
-                </div>
-                @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"]?.Errors?.Count > 0)
-                {
-                    <div class="validation-error">@ViewData.ModelState["email"]?.Errors?.First()?.ErrorMessage</div>
-                }
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">
-                    <i class="bi bi-lock me-1"></i>
-                    Password
-                </label>
-                <div class="input-group">
-                    <i class="bi bi-lock input-icon"></i>
-                    <input type="password" name="password" class="form-control form-control-with-icon" 
-                           placeholder="Enter password (min 6 characters)" required />
-                </div>
-                @if (!ViewData.ModelState.IsValid && ViewData.ModelState["password"]?.Errors?.Count > 0)
-                {
-                    <div class="validation-error">@ViewData.ModelState["password"]?.Errors?.First()?.ErrorMessage</div>
-                }
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">
-                    <i class="bi bi-lock me-1"></i>
-                    Confirm Password
-                </label>
-                <div class="input-group">
-                    <i class="bi bi-lock input-icon"></i>
-                    <input type="password" name="confirmPassword" class="form-control form-control-with-icon" 
-                           placeholder="Confirm your password" required />
-                </div>
-                @if (!ViewData.ModelState.IsValid && ViewData.ModelState["confirmPassword"]?.Errors?.Count > 0)
-                {
-                    <div class="validation-error">@ViewData.ModelState["confirmPassword"]?.Errors?.First()?.ErrorMessage</div>
-                }
-            </div>
-
-            @if (!ViewData.ModelState.IsValid)
-            {
-                <div class="validation-error">
-                    @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                    @if (!ViewData.ModelState.IsValid && ViewData.ModelState["email"]?.Errors?.Count > 0)
                     {
-                        <div>@error.ErrorMessage</div>
+                        <div class="validation-error">@ViewData.ModelState["email"]?.Errors?.First()?.ErrorMessage</div>
                     }
                 </div>
-            }
 
-            <button type="submit" class="btn-register">
-                <i class="bi bi-person-plus me-2"></i>
-                Create Account
-            </button>
-        </form>
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="bi bi-lock me-1"></i>
+                        Password
+                    </label>
+                    <div class="input-group">
+                        <i class="bi bi-lock input-icon"></i>
+                        <input type="password" name="password" class="form-control form-control-with-icon"
+                               placeholder="Enter password (min 6 characters)" required />
+                    </div>
+                    @if (!ViewData.ModelState.IsValid && ViewData.ModelState["password"]?.Errors?.Count > 0)
+                    {
+                        <div class="validation-error">@ViewData.ModelState["password"]?.Errors?.First()?.ErrorMessage</div>
+                    }
+                </div>
 
-        <div class="register-footer">
-            <p>Already have an account? 
-                <a asp-action="Login" class="register-link">Sign in here</a>
-            </p>
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="bi bi-lock me-1"></i>
+                        Confirm Password
+                    </label>
+                    <div class="input-group">
+                        <i class="bi bi-lock input-icon"></i>
+                        <input type="password" name="confirmPassword" class="form-control form-control-with-icon"
+                               placeholder="Confirm your password" required />
+                    </div>
+                    @if (!ViewData.ModelState.IsValid && ViewData.ModelState["confirmPassword"]?.Errors?.Count > 0)
+                    {
+                        <div class="validation-error">@ViewData.ModelState["confirmPassword"]?.Errors?.First()?.ErrorMessage</div>
+                    }
+                </div>
+
+                @if (!ViewData.ModelState.IsValid)
+                {
+                    <div class="validation-error">
+                        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+                        {
+                            <div>@error.ErrorMessage</div>
+                        }
+                    </div>
+                }
+
+                <button type="submit" class="btn-register">
+                    <i class="bi bi-person-plus me-2"></i>
+                    Create Account
+                </button>
+            </form>
+
+            <div class="register-footer">
+                <p>
+                    Already have an account?
+                    <a asp-action="Login" class="register-link">Sign in here</a>
+                </p>
+            </div>
         </div>
     </div>
-</div> 
+</div>
