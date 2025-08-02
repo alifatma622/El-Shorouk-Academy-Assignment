@@ -34,13 +34,16 @@ A complete ASP.NET MVC application for managing invoices and their related items
 ├── Models/
 │ ├── InvoiceHeader.cs
 │ └── InvoiceDetail.cs
+---
+
 ├── Views/
 │ └── Invoices/
 │ ├── Index.cshtml
 │ ├── Create.cshtml
 │ ├── Edit.cshtml
 │ ├── Details.cshtml
-│ └── _InvoiceItemsPartial.cshtml (if used)
+---
+
 ├── Migrations/
 ├── wwwroot/
 ├── appsettings.json
